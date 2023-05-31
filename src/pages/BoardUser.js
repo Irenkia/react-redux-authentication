@@ -7,12 +7,14 @@ const BoardUser = () => {
 
   useEffect(() => {
     userService.getUserBoard().then(
-      (respons) => {
-        setContent(respons.data);
+      (response) => {
+        setContent(response.data);
       },
       (error) => {
         const _content =
-          (error.respons && error.respons.data && error.respons.data.message) ||
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
           error.message ||
           error.toString();
 
