@@ -4,12 +4,10 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  SET_MESSAGE,
 } from "./types";
+import { SET_MESSAGE } from "../message/types";
 
 import authService from "../../services/auth.service";
-
-// import authService from "../../services/auth.service";
 
 export const register = (username, email, password) => (dispatch) => {
   return authService.register(username, email, password).then(
