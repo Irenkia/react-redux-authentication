@@ -12,7 +12,7 @@ const initialState = user
   ? { isLoggedIn: true, user }
   : { isLoggedIn: false, user: null };
 
-export default function (state = initialState, action) {
+const ReducerAuth = (state = initialState, action) => {
   const { type, plyload } = action;
 
   switch (type) {
@@ -30,8 +30,10 @@ export default function (state = initialState, action) {
 
     case LOGOUT:
       return { ...state, isLoggedIn: false, user: null };
-      
+
     default:
       return state;
   }
-}
+};
+
+export default ReducerAuth;
