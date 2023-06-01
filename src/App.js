@@ -13,6 +13,9 @@ import BoardAdmin from "./pages/BoardAdmin";
 import { logout } from "./store/auth/actions";
 import { clearMessage } from "./store/message/actions";
 
+import AuthVerify from "./common/AuthVerify";
+import EventBus from "./common/EventBus";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
@@ -21,6 +24,7 @@ const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
 
   const { user: currentUser } = useSelector((state) => state.auth || {});
+  // const { user: currentUser } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   let location = useLocation();
@@ -43,7 +47,15 @@ const App = () => {
       setShowModeratorBoard(false);
       setShowAdminBoard(false);
     }
-  }, [currentUser]);
+
+    EventBus.on("logout", () => {
+      logOut();
+    });
+
+    return () => {
+      EventBus.remove("logout");
+    };
+  }, [currentUser, logOut]);
 
   return (
     <div>
@@ -117,6 +129,8 @@ const App = () => {
           <Route path="/admin" element={<BoardAdmin />} />
         </Routes>
       </div>
+
+      <AuthVerify logOut={logOut} />
     </div>
   );
 };

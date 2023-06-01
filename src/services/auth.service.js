@@ -28,13 +28,13 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
-const authService = {
+const AuthService = {
   register,
   login,
   logout,
 };
 
-export default authService;
+export default AuthService;
 
 // export default {
 //   register,
